@@ -1,5 +1,7 @@
 package Calculator;
 
+import java.util.regex.Pattern;
+
 public class Add {
     public static int add(String numbers) {
         // handling empty string
@@ -9,16 +11,26 @@ public class Add {
             return numbers.charAt(0)-'0';
         }
         /* if string size > 1
-         * first split by delimiter ","
-         * second convert each char to int
-         * add
+         * iterate the string if the current char is the delimiter or "\n" new line then ignore it
+         * get the sum
          * return the result
          */
-        String[] tokens=numbers.split(",");
-        int sum=0;
-        for (String token : tokens) {
-            sum+=Integer.valueOf(token);
+        int result = -1;
+        if(isValidFormat(numbers)) {
+            String delimiter = ",|\n";
+            String[] tokens = numbers.split(delimiter);
+            int sum = 0;
+            for (String token : tokens) {
+                if(!token.isEmpty()) // \n at the beginning
+                    sum += Integer.parseInt(token);
+            }
+            result=sum;
         }
-        return sum;
+        return result;
+    }
+
+    private static boolean isValidFormat(String numbers) {
+        String regex = "(.*((\n,)|(,\n)).*|.*,$)";
+        return !(Pattern.compile(regex).matcher(numbers).matches());
     }
 }
