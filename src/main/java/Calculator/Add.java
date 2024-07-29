@@ -16,6 +16,10 @@ public class Add {
          * return the result
          */
         int result = -1;
+        if(numbers.startsWith("//")){
+            numbers=numbers.replace(numbers.charAt(2),',');
+            numbers=numbers.substring(3);
+        }
         if(isValidFormat(numbers)) {
             String delimiter = ",|\n";
             String[] tokens = numbers.split(delimiter);
