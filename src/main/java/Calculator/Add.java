@@ -11,7 +11,7 @@ public class Add {
             return numbers.charAt(0)-'0';
         }
         /* if string size > 1
-         * iterate the string if the current char is the delimiter or "\n" new line then ignore it
+         * validate the string
          * get the sum
          * return the result
          */
